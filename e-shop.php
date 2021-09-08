@@ -2,22 +2,52 @@
 
 class EShop {
 
-    // mettiamo una lista di prodotti
+    protected $product=[];
+    protected $user = [];
+
+    public function putProduct (Product $product){
+        $this->product[] = $product;
+    }
+    public function putUser (User $user){
+        $this->user[] = $user;
+    }
+
 
 }
 
-// ---------------------------------------------
+
 
 class Product {
+    protected $id; 
+    protected $name ;
+    protected $brand;
+    protected int $price ;
+    protected $description;
+    protected $disponibile = true;
+    protected $acquierente;
+
 
 }
 
 Class TechProduct extends Product {
+    public function __construct( $id, $name, $brand, $price, $description)
+    {   $this->$id; 
+        $this->name=$name; 
+        $this->brand=$brand; 
+        $this->price=$price; 
+        $this->description=$description;     
+    }
 
 }
 
 Class BeautyProduct extends Product {
-    
+    public function __construct( $id, $name, $brand, $price, $description)
+    {   $this->$id ;
+        $this->name=$name; 
+        $this->brand=$brand; 
+        $this->price=$price; 
+        $this->description=$description;     
+    }
 }
 
 // ---------------------------------------------
@@ -68,7 +98,7 @@ class StandardUser extends User{
     }
      
     public function putCreditCard (Credit $creditCard){
-        $this->cartaDiCredito = $creditCard;   
+        $this->cartaDiCredito[] = $creditCard;   
     }
 }
 class SpecialUser extends User{
@@ -98,7 +128,7 @@ class SpecialUser extends User{
     }
      
     public function putCreditCard ($creditCard){
-        $this->cartaDiCredito = $creditCard;
+        $this->cartaDiCredito[] = $creditCard;
     }
 }
 
@@ -129,19 +159,31 @@ class PremiumUser extends User{
     }
      
     public function putCreditCard ($creditCard){
-        $this->cartaDiCredito = $creditCard;
+        $this->cartaDiCredito[] = $creditCard;
     }
 }
 
 $gianni = new PremiumUser ("Gianni","Rodari");
 $visa = new Credit ("Visa", "4023600525688995");
-var_dump($visa);
-
-var_dump($gianni);
-
-// ----------------------------------------------
 
 
+$gianni->putCreditCard($visa);
+
+
+
+
+$amazon = new EShop();
+
+
+
+$amazon->putUser($gianni);
+
+$carlo = new SpecialUser ("Carlo","Conti");
+$master = new Credit ("Master Card", "4023600525555995");
+$carlo->putCreditCard($master);
+
+$amazon->putUser($carlo);
+var_dump($amazon);
 /*
 1. creiamo l'eshop
 2. creiamo diversi prodotti
